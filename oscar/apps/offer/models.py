@@ -486,8 +486,8 @@ class PercentageDiscountBenefit(Benefit):
                 break
             if self.range.contains_product(line.product) and line.product.has_stockrecord:
                 price = getattr(line.product.stockrecord, self.price_field)
-                quantity = min(line.quantity_without_discount, 
-                               max_affected_items - affected_items)
+                quantity = Decimal(str(min(line.quantity_without_discount, 
+                               max_affected_items - affected_items)))
                 discount += self.value/100 * price * quantity
                 affected_items += quantity
                 line.discount(discount, quantity)
